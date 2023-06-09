@@ -204,6 +204,23 @@ paths:
           schema:
             type: string
 
+
+
+
+# Querry
+
+  /usersQuery:
+    get:
+      parameters:
+        - in: query
+          name: id
+          description: This is the id of the user
+          required: true
+          type: integer
+      responses:
+        200:
+          description: Successful response
+          
 components:
   schemas:
     User:
@@ -215,14 +232,4 @@ components:
         name:
           type: string
           example: Shanuka
-  definitions:
-    User:
-      type: object
-      properties:
-        id:
-          type: integer
-          example: 1
-        name:
-          type: string
-          example: Shanuka
-
+  

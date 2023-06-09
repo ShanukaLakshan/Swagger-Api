@@ -40,6 +40,14 @@ app.post("/create", (req, res) => {
   res.send(users);
 });
 
+app.get("/usersQuery", (req, res) => {
+  const obj = users.find((user) => user.id === parseInt(req.params.id));
+  if (!obj) {
+    res.status(404).send("User not found");
+  }
+  res.status(200).send(obj);
+});
+
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
