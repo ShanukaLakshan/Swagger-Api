@@ -1,3 +1,228 @@
 swagger: "2.0"
 info:
   title: Test Api
+  version: 1.0.0
+  description: This is a test api
+  contact:
+    name: Shanuka
+    email: Shanuka@123
+  licence:
+    name: MIT
+    url: https://apache.org/
+  servers:
+    -url: "http://localhost:2000/"
+    description: This is my local server
+    -url: "http://localhost:3000/"
+    description: This is my company server
+
+schemes: [http, https]
+
+paths:
+
+# Returns a string
+  /string:
+    get:
+      summary: Returns a String
+      description: It will return a string
+      responses:
+        200:
+          description: Successful response
+          schema:
+            type: string
+            example: any string
+        400:
+          description: Bad request
+          schema:
+            type: string
+        500:
+          description: Internal server error
+          schema:
+            type: string
+
+# Returns a json object
+
+  /user:
+    get:
+      summary: This will return a json object
+      description: Returning a json object
+      responses:
+        200:
+          description: Successful response
+          schema:
+            type: object
+            properties:
+              id:
+                type: integer
+                example: 1
+              name:
+                type: string
+                example: Shanuka
+            
+        400:
+          description: Bad request
+          schema:
+            type: string
+        500:
+          description: Internal server error
+          schema:
+            type: string
+
+# Returns a json array
+  
+  /users:
+    get:
+      summary: This will return a json array
+      description: Returning a json array
+      responses:
+        200:
+          description: Successful response
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                id:
+                  type: integer
+                  example: 1
+                name:
+                  type: string
+                  example: Shanuka
+        400:
+          description: Bad request
+          schema:
+            type: string
+        500:
+          description: Internal server error
+          schema:
+            type: string
+
+# Return a json object with a query parameter
+
+  /users/{id}:
+    get:
+      summary: This will return a json object
+      description: Returning a json object
+      parameters:
+        - name: id
+          in: path
+          description: This is the id of the user
+          required: true
+          type: integer
+      responses:
+        200:
+          description: Successful response
+          schema:
+            type: object
+            properties:
+              id:
+                type: integer
+                example: 1
+              name:
+                type: string
+                example: Shanuka
+        400:
+          description: Bad request
+          schema:
+            type: string
+        500:
+          description: Internal server error
+          schema:
+            type: string
+
+# Post json/body
+
+  # /create:
+  #   post:
+  #     summary: This will create a user
+  #     description: Creating a user
+  #     produces:
+  #       - application/json
+  #     consumes:
+  #       - application/json
+  #     parameters:
+  #       - in: body
+  #         name: user
+  #         description: This is the user object
+  #         required: true
+  #         schema:
+  #           type: object
+  #           properties:
+  #             id:
+  #               type: integer
+  #               example: 1
+  #             name:
+  #               type: string
+  #               example: Shanuka
+  #     responses:
+  #       200:
+  #         description: Successful response
+  #         schema:
+  #           type: object
+  #           properties:
+  #             id:
+  #               type: integer
+  #             name:
+  #               type: string
+  #       400:
+  #         description: Bad request
+  #         schema:
+  #           type: string
+  #       500:
+  #         description: Internal server error
+  #         schema:
+  #           type: string
+
+
+# Schema with Dedinitionv simiar to above one
+
+  /create:
+    post:
+      summary: This will create a user
+      description: Creating a user
+      produces:
+        - application/json
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: user
+          description: This is the user object
+          required: true
+          schema:
+            $ref: '#/components/schemas/User'
+      responses:
+        200:
+          description: Successful response
+          schema:
+            $ref: '#/components/schemas/User'
+        400:
+          description: Bad request
+          schema:
+            type: string
+        500:
+          description: Internal server error
+          schema:
+            type: string
+
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        name:
+          type: string
+          example: Shanuka
+  definitions:
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        name:
+          type: string
+          example: Shanuka
+
