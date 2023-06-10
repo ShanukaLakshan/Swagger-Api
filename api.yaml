@@ -217,9 +217,41 @@ paths:
           description: This is the id of the user
           required: true
           type: integer
+          enum: [1,2,3] # only these values are allowed
       responses:
         200:
           description: Successful response
+
+# File upload
+  /upload:
+    post:
+      consumes:
+        - multipart/form-data
+      parameters:
+        - in: formData
+          name: file
+          type: file
+          required: true
+          description: File upload
+        - in: formData
+          name: id
+          type: integer
+          required: true
+          description: ID of interger
+        - in: header
+          name: auth
+          schema:
+            type: string
+        - in: cookie
+          name: debug
+          schema:
+            type: string
+
+        
+        
+      responses:
+        200:
+          description: OK
           
 components:
   schemas:
